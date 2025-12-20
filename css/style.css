@@ -118,3 +118,290 @@ p {
     margin: 30px auto;
     border-radius: 10px;
 }
+
+/* Global Warming Animation (Page 2) */
+.warming-scene {
+    position: relative;
+    width: 300px;
+    height: 200px;
+    margin: 20px auto;
+    overflow: hidden;
+    border-radius: 10px;
+    background: linear-gradient(to bottom, #87CEEB 0%, #E0F7FA 60%, #0288D1 60%, #0277BD 100%);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+.sun {
+    position: absolute;
+    top: -20px;
+    right: -20px;
+    width: 80px;
+    height: 80px;
+    background: #FFD700;
+    border-radius: 50%;
+    box-shadow: 0 0 20px #FF8C00;
+    animation: sunPulse 2s infinite alternate;
+}
+
+@keyframes sunPulse {
+    from { transform: scale(1); box-shadow: 0 0 20px #FF8C00; }
+    to { transform: scale(1.2); box-shadow: 0 0 40px #FF4500; }
+}
+
+.iceberg-container {
+    position: absolute;
+    bottom: 60px; /* Starts above water line */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    z-index: 2;
+}
+
+.iceberg {
+    width: 0;
+    height: 0;
+    border-left: 40px solid transparent;
+    border-right: 40px solid transparent;
+    border-bottom: 60px solid #fff;
+    position: relative;
+    animation: iceMelt 5s ease-in-out infinite alternate;
+}
+
+.iceberg::after {
+    content: '';
+    position: absolute;
+    top: 60px;
+    left: -40px;
+    width: 80px;
+    height: 20px;
+    background: rgba(255,255,255,0.3);
+    border-radius: 0 0 40px 40px;
+}
+
+.water {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 40%; /* Initial water level */
+    background: rgba(2, 119, 189, 0.8);
+    z-index: 3;
+    animation: waterRise 5s ease-in-out infinite alternate;
+}
+
+.water::before {
+    content: '';
+    position: absolute;
+    top: -10px;
+    left: 0;
+    width: 200%;
+    height: 20px;
+    background: rgba(2, 119, 189, 0.8);
+    border-radius: 50%;
+    animation: waveMove 2s linear infinite;
+}
+
+.thermometer-floating {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 2rem;
+    z-index: 4;
+    animation: float 3s ease-in-out infinite;
+}
+
+@keyframes iceMelt {
+    0% { transform: scale(1) translateY(0); opacity: 1; }
+    100% { transform: scale(0.4) translateY(30px); opacity: 0.8; }
+}
+
+@keyframes waterRise {
+    0% { height: 40%; }
+    100% { height: 70%; }
+}
+
+@keyframes waveMove {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+
+/* Common Scene Styles */
+.scene {
+    position: relative;
+    width: 300px;
+    height: 200px;
+    margin: 20px auto;
+    overflow: hidden;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+
+/* Page 3: Ocean Pollution */
+.ocean-scene { background: linear-gradient(to bottom, #4facfe 0%, #00f2fe 100%); }
+.fish { font-size: 3rem; position: absolute; top: 50%; left: 50%; animation: swim 4s linear infinite; }
+.trash { font-size: 2rem; position: absolute; top: -50px; animation: trashFall 3s linear infinite; }
+.trash-1 { left: 30%; animation-delay: 0s; }
+.trash-2 { left: 70%; animation-delay: 1.5s; }
+@keyframes swim {
+    0% { transform: translate(-150px, 0) scaleX(1); }
+    49% { transform: translate(150px, 0) scaleX(1); }
+    50% { transform: translate(150px, 0) scaleX(-1); }
+    100% { transform: translate(-150px, 0) scaleX(-1); }
+}
+@keyframes trashFall {
+    0% { top: -50px; transform: rotate(0deg); }
+    100% { top: 250px; transform: rotate(360deg); }
+}
+
+/* Page 4: Deforestation */
+.forest-scene { background: #81C784; }
+.tree { font-size: 5rem; position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); animation: treeFall 4s ease-in-out infinite; }
+.axe { font-size: 3rem; position: absolute; bottom: 50px; right: 20px; animation: axeChop 4s ease-in-out infinite; }
+.stump { font-size: 4rem; position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); opacity: 0; animation: stumpAppear 4s ease-in-out infinite; }
+@keyframes axeChop {
+    0%, 40% { transform: rotate(0deg); right: 20px; }
+    50% { transform: rotate(-45deg) translate(-50px, 20px); }
+    60% { transform: rotate(0deg); right: 20px; }
+    100% { transform: rotate(0deg); right: 20px; }
+}
+@keyframes treeFall {
+    0%, 50% { transform: translateX(-50%) rotate(0deg); opacity: 1; }
+    60% { transform: translateX(-50%) rotate(90deg); opacity: 0; }
+    100% { transform: translateX(-50%) rotate(90deg); opacity: 0; }
+}
+@keyframes stumpAppear {
+    0%, 55% { opacity: 0; }
+    60%, 100% { opacity: 1; }
+}
+
+/* Page 5: Biodiversity */
+.animal-scene { background: #A5D6A7; }
+.animal { font-size: 4rem; position: absolute; bottom: 20px; animation: fadeOutAnimal 4s infinite alternate; }
+.panda { left: 20%; animation-delay: 0s; }
+.tiger { right: 20%; animation-delay: 2s; }
+@keyframes fadeOutAnimal {
+    0%, 30% { opacity: 1; filter: blur(0); }
+    100% { opacity: 0; filter: blur(10px); }
+}
+
+/* Page 6: Air Pollution */
+.factory-scene { background: #B0BEC5; }
+.factory { font-size: 5rem; position: absolute; bottom: 10px; left: 20px; }
+.smoke { font-size: 3rem; position: absolute; bottom: 80px; left: 50px; opacity: 0; color: #546E7A; animation: smokeRise 3s linear infinite; }
+.smoke-1 { animation-delay: 0s; }
+.smoke-2 { animation-delay: 1s; }
+.smoke-3 { animation-delay: 2s; }
+@keyframes smokeRise {
+    0% { transform: translateY(0) scale(0.5); opacity: 0.8; }
+    100% { transform: translateY(-150px) scale(2); opacity: 0; }
+}
+
+/* Page 7: Transition */
+.think-scene { background: #FFF59D; display: flex; justify-content: center; align-items: center; }
+.person { font-size: 4rem; animation: thinkBounce 2s infinite; }
+.idea { font-size: 3rem; position: absolute; top: 20px; right: 80px; opacity: 0; animation: ideaFlash 2s infinite; }
+@keyframes thinkBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+@keyframes ideaFlash {
+    0%, 40% { opacity: 0; transform: scale(0); }
+    50%, 90% { opacity: 1; transform: scale(1); }
+    100% { opacity: 0; }
+}
+
+/* Page 8: Save Energy */
+.bulb-scene { background: #333; display: flex; justify-content: center; align-items: center; }
+.bulb { font-size: 5rem; animation: bulbToggle 4s infinite; }
+@keyframes bulbToggle {
+    0%, 45% { text-shadow: 0 0 50px yellow; color: #fff; filter: brightness(1.5); }
+    50%, 100% { text-shadow: none; color: #555; filter: brightness(0.5); }
+}
+
+/* Page 9: Green Transport */
+.transport-scene { background: #E0E0E0; overflow: hidden; }
+.road { position: absolute; bottom: 20px; width: 100%; height: 4px; background: #555; }
+.bike { font-size: 3rem; position: absolute; bottom: 25px; left: -50px; animation: bikeMove 5s linear infinite; }
+.car { font-size: 3rem; position: absolute; bottom: 25px; right: -50px; opacity: 0.5; animation: carFade 5s linear infinite; }
+@keyframes bikeMove {
+    0% { left: -50px; }
+    100% { left: 350px; }
+}
+@keyframes carFade {
+    0% { right: -50px; opacity: 1; }
+    50% { right: 150px; opacity: 0.2; }
+    100% { right: 350px; opacity: 0; }
+}
+
+/* Page 10: Garbage Sorting */
+.sort-scene { background: #F5F5F5; }
+.bins { display: flex; justify-content: space-around; position: absolute; bottom: 20px; width: 100%; font-size: 3rem; }
+.falling-trash { font-size: 2rem; position: absolute; top: -50px; left: 50%; transform: translateX(-50%); animation: sortFall 3s infinite; }
+@keyframes sortFall {
+    0% { top: -50px; left: 50%; }
+    40% { top: 50px; left: 50%; }
+    100% { top: 120px; left: 15%; transform: scale(0); } /* Falls into first bin */
+}
+
+/* Page 11: Save Water */
+.water-scene { background: #E1F5FE; }
+.tap { font-size: 4rem; position: absolute; top: 20px; left: 50%; transform: translateX(-50%); }
+.drop { font-size: 2rem; position: absolute; top: 80px; left: 50%; transform: translateX(-50%); animation: drip 2s infinite; }
+@keyframes drip {
+    0% { top: 80px; opacity: 1; }
+    80% { top: 150px; opacity: 1; }
+    90% { top: 160px; opacity: 0; transform: scale(1.5, 0.5); } /* Splash */
+    100% { top: 160px; opacity: 0; }
+}
+
+/* Page 12: Plant Trees */
+.plant-scene { background: #FFF3E0; }
+.soil { font-size: 3rem; position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%); }
+.sprout { font-size: 2rem; position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); animation: growSprout 4s infinite; }
+.big-tree { font-size: 5rem; position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%); opacity: 0; animation: growTree 4s infinite; }
+@keyframes growSprout {
+    0%, 30% { transform: translateX(-50%) scale(0); }
+    40%, 60% { transform: translateX(-50%) scale(1); opacity: 1; }
+    70%, 100% { transform: translateX(-50%) scale(1); opacity: 0; }
+}
+@keyframes growTree {
+    0%, 60% { transform: translateX(-50%) scale(0); opacity: 0; }
+    70%, 100% { transform: translateX(-50%) scale(1); opacity: 1; }
+}
+
+/* Page 13: No Plastics */
+.plastic-scene { background: #FFEBEE; display: flex; justify-content: center; align-items: center; }
+.plastic-item { font-size: 4rem; animation: plasticSwap 4s infinite; }
+.cross { font-size: 5rem; position: absolute; color: red; animation: crossAppear 4s infinite; }
+.eco-bag { font-size: 4rem; position: absolute; opacity: 0; animation: bagAppear 4s infinite; }
+@keyframes plasticSwap {
+    0%, 45% { opacity: 1; }
+    50%, 100% { opacity: 0; }
+}
+@keyframes crossAppear {
+    0%, 10% { opacity: 0; transform: scale(0); }
+    20%, 40% { opacity: 1; transform: scale(1); }
+    50%, 100% { opacity: 0; }
+}
+@keyframes bagAppear {
+    0%, 50% { opacity: 0; transform: scale(0); }
+    60%, 100% { opacity: 1; transform: scale(1); }
+}
+
+/* Page 14: Future */
+.future-scene { background: linear-gradient(to bottom, #81D4FA, #81C784); }
+.sky { position: absolute; top: 20px; right: 20px; font-size: 3rem; animation: spinSun 10s linear infinite; }
+.rainbow { font-size: 6rem; position: absolute; top: 50px; left: 50%; transform: translateX(-50%); opacity: 0; animation: rainbowShow 5s infinite alternate; }
+.nature { font-size: 3rem; position: absolute; bottom: 20px; width: 100%; animation: natureBounce 2s infinite; }
+@keyframes spinSun { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+@keyframes rainbowShow { 0% { opacity: 0; } 100% { opacity: 0.8; } }
+@keyframes natureBounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+
