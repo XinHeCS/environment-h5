@@ -405,3 +405,35 @@ p {
 @keyframes rainbowShow { 0% { opacity: 0; } 100% { opacity: 0.8; } }
 @keyframes natureBounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
 
+
+/* Music Control */
+.music-control {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 1000;
+    font-size: 20px;
+    animation: musicRotate 3s linear infinite;
+    animation-play-state: paused;
+    user-select: none;
+}
+
+.music-control.playing {
+    animation-play-state: running;
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+@keyframes musicRotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+

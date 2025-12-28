@@ -84,4 +84,50 @@ document.addEventListener('DOMContentLoaded', () => {
             prevPage();
         }
     });
+
+    // Music Control Logic
+    const bgMusic = document.getElementById('bg-music');
+    const musicToggle = document.getElementById('music-toggle');
+    
+    // Set default volume (Low)
+    bgMusic.volume = 0.1;
+
+    function toggleMusic() {
+        if (bgMusic.paused) {
+            bgMusic.play().then(() => {
+                musicToggle.classList.add('playing');
+            }).catch(error => {
+                console.log("Playback failed:", error);
+            });
+        } else {
+            bgMusic.pause();
+            musicToggle.classList.remove('playing');
+        }
+    }
+
+    musicToggle.addEventListener('click', toggleMusic);
+
+    // Attempt to play automatically
+    bgMusic.play().then(() => {
+        musicToggle.classList.add('playing');
+    }).catch(() => {
+        console.log("Autoplay blocked. Waiting for user interaction.");
+        
+        const startMusic = () => {
+            bgMusic.play().then(() => {
+                musicToggle.classList.add('playing');
+                // Only remove listeners if playback actually started
+                document.removeEventListener('click', startMusic);
+                document.removeEventListener('touchstart', startMusic);
+                document.removeEventListener('keydown', startMusic);
+            }).catch(error => {
+                console.log("Interaction failed to start music:", error);
+            });
+        };
+
+        // Only listen for "trusted" events that allow audio playback
+        document.addEventListener('click', startMusic);
+        document.addEventListener('touchstart', startMusic);
+        document.addEventListener('keydown', startMusic);
+    });
 });
